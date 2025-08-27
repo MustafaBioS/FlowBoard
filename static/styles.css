@@ -60,6 +60,7 @@ body {
     margin-left: 350px;
     -webkit-user-drag: none;
     position: absolute;
+    user-select: none;
 }
 
 .txtCon {
@@ -128,4 +129,128 @@ body {
     background-color: rgb(187, 183, 183);
     transform: translateY(-8px);
     cursor: pointer;
+}
+
+.logbody {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+}
+
+.bg {
+    background-color: #26566d;
+    height: 600px;
+    width: 400px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+}
+
+.logtitle {
+    font-size: 50px;
+    margin-top: 50px;
+    color: white;
+    position: absolute;
+}
+
+.logform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    gap: 20px;
+    position: absolute;
+    margin-top: 50px;
+
+}
+
+.input {
+    height: 35px;
+    width: 250px;
+    border-radius: 30px;
+    padding-left: 20px;
+    outline: none;
+    border: none;   
+    transition: all 0.3s ease;
+
+    font-size: 16px;
+    user-select: none;
+}
+
+.input:focus {
+    transform: translateY(-6px);
+    box-shadow: 2px 2px 50px rgba(255, 255, 255, 0.7);
+    background-color: rgb(157, 195, 230);
+    color: white;
+}
+
+.input:focus::placeholder {
+    color: rgb(255, 255, 255);
+
+}
+
+.input::placeholder {
+    color: black;
+}
+
+.submit {
+    height: 35px;
+    width: 225px;
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    background-color: aliceblue;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    user-select: none;
+}
+
+.submit:hover {
+    transform: translateY(-6px);
+    cursor: pointer;
+    box-shadow: 2px 2px 50px rgba(255, 255, 255, 0.7);
+    background-color: rgb(157, 195, 230);
+    color: white;
+}
+
+.noaccountCon {
+    position: absolute;
+    display: flex;
+    align-content: center;
+    justify-content: flex-end;
+    user-select: none;
+}
+
+.noacc {
+    margin-top: 50px;
+    color: white;
+    font-size: 17px;
+    user-select: none;
+}
+
+.signup {
+    color: rgb(0, 162, 255);
+    transition: all 0.3s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.signup:hover {
+    color: rgb(75, 139, 175);
+}
+
+.flash {
+    z-index: 3;
+}
+
+.logout:hover {
+    transform: translateY(-6px);
+    cursor: pointer;
+    box-shadow: 2px 2px 50px rgba(255, 255, 255, 0.7);
+    background-color: rgb(157, 195, 230);
+    color: white;
 }
