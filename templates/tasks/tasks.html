@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Tasks</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
+<body class="logbody">
+<div class="navCon">
     <nav class="navbar">
         <a class="navitem home">Home</a>
         <a class="navitem tm">Task Manager</a>
@@ -22,35 +23,39 @@
             {% endif %}
         </div>
     </nav>
+</div>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-            <div class="flashCon">
-                <div class="flash {{ category }}">{{ message }}</div>
-            </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+    <div class="bg tbg">
+        <h1 class="logtitle ttitle">Tasks</h1>
 
-    <div class="titleCon">
-        <h1 class="title">FlowBoard</h1><br>
-    </div>
+        <div class="taskCon">
+            <ul class="list">
+                {% for task in tasks %}
+                <div class="taskbg">
+                    <li class="listitem">
+                        {{ task.tcontent }}
+                    </li>
+                    <form class="trashCon" action="{{ url_for('deletetask', task_id = task.tid) }}", method="post">
+                        <img src="../../static/icons8-trash-64.png" class="trash" alt="trash delete">
+                    </form>
+                </div>
+                {% endfor %}
+            </ul>
+        </div>
 
-    <div class="container">
-        <img src="../static/images.jpg" alt="declutter" class="declutter">
-    </div>
-    <div class="cont">
-        <div class="txtCon">
-            <p class="desc">
-                Declutter your life with this these tools that will help you organize everything in your life, 
-                from tasks you need to do, to notes you need to take, 
-                or even websites you need to bookmark, FlowBoard has all of that for you in a single website.
-            </p>
+
+
+        <div class="addCon">
+            <a class='signup addt' href="{{ url_for('addtask') }}">Add Task</a>
         </div>
     </div>
-
     <script>
+        const trash = document.querySelector('.trash')
+        const form = document.querySelector('.trashCon')
+
+        trash.addEventListener('click', ()=> {
+            form.submit();
+        })
 
 document.addEventListener('DOMContentLoaded', () => {
     const log = document.querySelector('.log');

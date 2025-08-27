@@ -1,58 +1,47 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Tasks</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-    <nav class="navbar">
-        <a class="navitem home">Home</a>
-        <a class="navitem tm">Task Manager</a>
-        <a class="navitem notes">Notes</a>
-        <a class="navitem bookmarks">Bookmarks</a>
-        <div class="logCon">
-            {% if current_user.is_authenticated %}
-                <button class="logout btn">Logout</button>
-            {% else %}
-                <button class='log btn'>Login</button>
-                <button class="sign btn">Sign up</button>
-            {% endif %}
-        </div>
-    </nav>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-            <div class="flashCon">
-                <div class="flash {{ category }}">{{ message }}</div>
+<body class="logbody">
+    <div class="navCon">
+        <nav class="navbar">
+            <a class="navitem home">Home</a>
+            <a class="navitem tm">Task Manager</a>
+            <a class="navitem notes">Notes</a>
+            <a class="navitem bookmarks">Bookmarks</a>
+            <div class="logCon">
+                {% if current_user.is_authenticated %}
+                    <button class="logout btn">Logout</button>
+                {% else %}
+                    <button class='log btn'>Login</button>
+                    <button class="sign btn">Sign up</button>
+                {% endif %}
             </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-
-    <div class="titleCon">
-        <h1 class="title">FlowBoard</h1><br>
+        </nav>
     </div>
 
-    <div class="container">
-        <img src="../static/images.jpg" alt="declutter" class="declutter">
-    </div>
-    <div class="cont">
-        <div class="txtCon">
-            <p class="desc">
-                Declutter your life with this these tools that will help you organize everything in your life, 
-                from tasks you need to do, to notes you need to take, 
-                or even websites you need to bookmark, FlowBoard has all of that for you in a single website.
-            </p>
+    <div class="bg tbg">
+        <h1 class="logtitle ttitle">Add Task</h1>
+
+        <form class="logform taskform" action="{{ url_for('addtask') }}" method="post">
+            <input class="input task" type="text" name="task" placeholder="Enter Task" required>
+            <input type="submit" value="Add Task" class="submit subtask">
+        </form>
+
+
+        <div class="addCon">
+            <a class='signup addt' href="{{ url_for('tasks') }}">View Tasks</a>
         </div>
     </div>
 
-    <script>
 
-document.addEventListener('DOMContentLoaded', () => {
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
     const log = document.querySelector('.log');
     const sign = document.querySelector('.sign');
     const home = document.querySelector('.home');
@@ -104,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-    </script>
+</script>
 </body>
 </html>
