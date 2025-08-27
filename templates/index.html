@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="navitem home">Home</a>
+        <a href="#" class="navitem tm">Task Manager</a>
+        <a href="#" class="navitem notes">Notes</a>
+        <a href="#" class="navitem bookmarks">Bookmarks</a>
+        <div class="logCon">
+            <button class='log btn'>Login</button>
+            <button class="sign btn">Sign up</button>
+        </div>
+    </nav>
+    <div class="titleCon">
+        <h1 class="title">FlowBoard</h1><br>
+    </div>
+
+    <div class="container">
+        <img src="../static/images.jpg" alt="declutter" class="declutter">
+    </div>
+    <div class="cont">
+        <div class="txtCon">
+            <p class="desc">Declutter your life with this these tools that will help you organize everything in your life, 
+                from tasks you need to do, to notes you need to take, 
+                or even websites you need to bookmark, FlowBoard has all of that for you in a single website.
+
+            </p>
+        </div>
+    </div>
+
+
+</body>
+</html>
