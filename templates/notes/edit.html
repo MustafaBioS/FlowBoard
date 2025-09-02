@@ -6,7 +6,7 @@
     <title>Tasks</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body class="logbody">
+<body class="addbody">
     <div class="navCon">
         <nav class="navbar">
             <a class="navitem home">Home</a>
@@ -24,23 +24,19 @@
         </nav>
     </div>
 
-    <div class="bg tbg">
-        <h1 class="logtitle ttitle">Add Task</h1>
-
-        <form class="logform taskform" action="{{ url_for('addtask') }}" method="post">
-            <input class="input task" type="text" name="task" placeholder="Enter Task"  maxlength="64" required>
-            <input type="submit" value="Add Task" class="submit subtask">
-        </form>
-
-
-        <div class="addCon">
-            <a class='signup addt' href="{{ url_for('tasks') }}">View Tasks</a>
+    <form class="Con" method="post" action="{{ url_for('editnotes', note_id=note.nid) }}">
+        <div class="newCon">
+            <button class="submit newnote" type="submit">Edit Note</button>
         </div>
-    </div>
+        <div class="con">
+            <input type="text" class="intitle" maxlength="64" placeholder="Title" value="{{ note.ntitle }}" name="newtitle" required>
+            <textarea class="content" placeholder="Type Your Note Here" wrap="soft" name="newcontent" required>{{ note.ncontent }}</textarea>
+        </div>
+    </form>
 
 
 
-<script>
+    <script>
     document.addEventListener('DOMContentLoaded', () => {
     const log = document.querySelector('.log');
     const sign = document.querySelector('.sign');
@@ -49,7 +45,7 @@
     const notes = document.querySelector('.notes');
     const bm = document.querySelector('.bookmarks');
     const logout = document.querySelector('.logout');
-
+        
     if (log) {
         log.addEventListener('click', () => {
             window.location.href = "{{ url_for('login') }}";

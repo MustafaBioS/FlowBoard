@@ -50,12 +50,7 @@
         </div>
     </div>
     <script>
-        const trash = document.querySelector('.trash')
-        const form = document.querySelector('.trashCon')
 
-        trash.addEventListener('click', ()=> {
-            form.submit();
-        })
 
 document.addEventListener('DOMContentLoaded', () => {
     const log = document.querySelector('.log');
@@ -65,18 +60,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const notes = document.querySelector('.notes');
     const bm = document.querySelector('.bookmarks');
     const logout = document.querySelector('.logout');
+    const trash = document.querySelector('.trash')
+    const form = document.querySelector('.trashCon')
 
-    if (log) {
-        log.addEventListener('click', () => {
-            window.location.href = "{{ url_for('login') }}";
+    if (trash) {
+    trash.addEventListener('click', ()=> {
+            form.submit();
         });
     }
 
-    if (sign) {
-        sign.addEventListener('click', () => {
-            window.location.href = "{{ url_for('signup') }}";
-        });
-    }
 
     if (home) {
         home.addEventListener('click', () => {

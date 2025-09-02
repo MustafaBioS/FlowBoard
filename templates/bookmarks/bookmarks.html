@@ -3,57 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasks</title>
+    <title>Bookmarks</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="navCon">
-        <nav class="navbar">
-            <a class="navitem home">Home</a>
-            <a class="navitem tm">Task Manager</a>
-            <a class="navitem notes">Notes</a>
-            <a class="navitem bookmarks">Bookmarks</a>
-            <div class="logCon">
-                {% if current_user.is_authenticated %}
-                    <button class="logout btn">Logout</button>
-                {% else %}
-                    <button class='log btn'>Login</button>
-                    <button class="sign btn">Sign up</button>
-                {% endif %}
-            </div>
-        </nav>
-    </div>
+    <nav class="navbar">
+        <a class="navitem home">Home</a>
+        <a class="navitem tm">Task Manager</a>
+        <a class="navitem notes">Notes</a>
+        <a class="navitem bookmarks">Bookmarks</a>
+        <div class="logCon">
+            {% if current_user.is_authenticated %}
+                <button class="logout btn">Logout</button>
+            {% else %}
+                <button class='log btn'>Login</button>
+                <button class="sign btn">Sign up</button>
+            {% endif %}
+        </div>
+    </nav>
+
     <div class="btnCon">
-        <button class="submit newnote">New Note</button>
+        <button class="submit newnote">New Bookmark</button>
     </div>
     <div class="notesCon">
-        <div class="notesdisplay" {% if not newnote %} style="display: flex; align-items: center; justify-content: center;" {% endif %}>
-            {% if newnote %}
-            <div class="allnotesCon">
-                {% for note in newnote %}
-                <div class="notebg">
-                    <h1 class="noteTitle">{{ note.ntitle }}</h1>
-                    <p class="noteContent">{{ note.ncontent }}</p>
+        <div class="notesdisplay bmdisplay" {% if not newbm %} style="display: flex; align-items: center; justify-content: center;" {% endif %}>
+            {% if newbm %}
+            <div class="allbm">
+                {% for bm in newbm %}
+                <div class="notebg bmmbg" onclick="window.location.href = '{{ bm.blink }}'">
+                    <h1 class="bmTitle">{{ bm.btitle }}</h1>
                     <div class="notetrashCon">
-                    <form action="{{ url_for('deletenotes', note_id = note.nid )}}" method="post" class="deleteform">
+                </div>
+                <div class="notetrashCon">
+                    <form action="{{ url_for('deletebm', bm_id = bm.bid )}}" method="post" class="deleteform">
                         <img src="../../static/icons8-trash-64.png" alt="delete" class="img notetrash">
                     </form>
-                    <form action="{{ url_for('editnotes', note_id=note.nid) }}" class="editform">
+                    <form action="{{ url_for('editbm', bm_id=bm.bid) }}" class="editform">
                         <img src="../../static/icons8-edit-pencil-50.png" alt="edit" class="img notedit">
                     </form>
-                    </div>
+                </div>
                 </div>
                 {% endfor %}
             </div>
             {% else %}
             <div class="emptyCon">
-                <h1 class="nonotes">No Notes Available</h1>
+                <h1 class="nonotes">No Bookmarks Available</h1>
             </div>
             {% endif %}
         </div>
     </div>
 
-    <script>
+
+
+<script>
+    
     document.addEventListener('DOMContentLoaded', () => {
     const log = document.querySelector('.log');
     const sign = document.querySelector('.sign');
@@ -83,7 +86,7 @@
 
     if (newnote) {
         newnote.addEventListener('click', ()=> {
-            window.location.href = '{{ url_for("addnotes") }}';
+            window.location.href = '{{ url_for("addbm") }}';
         })
     }
 
