@@ -24,17 +24,17 @@
         </nav>
     </div>
 
-    <form class="Con" method="post" action="{{ url_for('addbm') }}">
-        <div class="newCon">
-            <button class="submit newnote newbm2" type="submit">Add Bookmark</button>
-        </div>
+    <form class="Con" method="post" action="{{ url_for('editbm', bm_id = bm.bid) }}">
+        {% if bm %}
         <div class="bmcon">
             <div class="bmbg">
                 <h1 class='bmlogo'>Bookmarks</h1>
-                <input type="text" class="bmi bmtitle" maxlength="64" placeholder="Name" name="name" required>
-                <input class="bmi bmcontent" placeholder="URL" name="URL" required></input>
+                <input type="text" class="bmi bmtitle" maxlength="64" placeholder="Name" name="name" value="{{bm.btitle}}" required>
+                <input class="bmi bmcontent" placeholder="URL" name="URL" value="{{ bm.blink }}" required></input>
+                <button class="submit newnote newbm" type="submit">Edit Bookmark</button>
             </div>
         </div>
+        {% endif %}
     </form>
 
 

@@ -22,6 +22,18 @@
         </div>
     </nav>
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
     <div class="btnCon">
         <button class="submit newnote">New Bookmark</button>
     </div>
@@ -30,18 +42,18 @@
             {% if newbm %}
             <div class="allbm">
                 {% for bm in newbm %}
-                <div class="notebg bmmbg" onclick="window.location.href = '{{ bm.blink }}'">
+                <div class="bmmbg" onclick="window.location.href = '{{ bm.blink }}'">
                     <h1 class="bmTitle">{{ bm.btitle }}</h1>
                     <div class="notetrashCon">
                 </div>
-                <div class="notetrashCon">
-                    <form action="{{ url_for('deletebm', bm_id = bm.bid )}}" method="post" class="deleteform">
-                        <img src="../../static/icons8-trash-64.png" alt="delete" class="img notetrash">
-                    </form>
-                    <form action="{{ url_for('editbm', bm_id=bm.bid) }}" class="editform">
-                        <img src="../../static/icons8-edit-pencil-50.png" alt="edit" class="img notedit">
-                    </form>
-                </div>
+                 <div class="notetrashCon bmtrashCon"> 
+                        <form action="{{ url_for('deletebm', bm_id = bm.bid )}}" method="post" class="deleteform bmdel">
+                            <img src="../../static/icons8-trash-64.png" alt="delete" class="img notetrash bmdelete" onclick="event.stopPropagation()">
+                        </form>
+                        <form action="{{ url_for('editbm', bm_id=bm.bid) }}" class="editform bmed">
+                            <img src="../../static/icons8-edit-pencil-50.png" alt="edit" class="img notedit bmedit" onclick="event.stopPropagation()">
+                        </form>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
@@ -67,18 +79,34 @@
     const logout = document.querySelector('.logout');
     const display = document.querySelector('.notesdisplay');
     const newnote = document.querySelector('.newnote');
-    const deleteform = document.querySelector('.deleteform');
-    const editform = document.querySelector('.editform');
+    const bmdelete = document.querySelector('.bmdelete');
+    const bmdel = document.querySelector('.bmdel');
+    const bmedit = document.querySelector('.bmedit');
+    const bmed = document.querySelector('.bmed')
 
-    if (editform) {
-        editform.addEventListener('click', ()=> {
-            editform.submit()
+    document.querySelectorAll('.bmdelete').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            btn.closest('form').submit();
+        });
+    });
+
+    document.querySelectorAll('.bmedit').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            btn.closest('form').submit();
+        });
+    });
+
+    if (bmdelete) {
+        bmdelete.addEventListener('click', ()=> {
+            bmdel.submit()
         })
     }
 
-    if (deleteform) {
-        deleteform.addEventListener('click', ()=> {
-            deleteform.submit()
+    if (bmedit) {
+        bmedit.addEventListener('click', ()=> {
+            bmed.submit()
         });
     }
 

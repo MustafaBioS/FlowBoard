@@ -7,7 +7,7 @@
     <title>Home Page</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
+<body style="overflow: hidden">
     <nav class="navbar">
         <a class="navitem home">Home</a>
         <a class="navitem tm">Task Manager</a>
@@ -24,14 +24,17 @@
     </nav>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-            <div class="flashCon">
-                <div class="flash {{ category }}">{{ message }}</div>
+    {% if messages %}
+        <div class="flash-container">
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">
+            {{ message }}
             </div>
-            {% endfor %}
-        {% endif %}
+        {% endfor %}
+        </div>
+    {% endif %}
     {% endwith %}
+
 
     <div class="titleCon">
         <h1 class="title">FlowBoard</h1><br>

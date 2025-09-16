@@ -79,6 +79,7 @@ def login():
 
         if user and bcrypt.check_password_hash(user.password, password):
             login_user(user)
+            flash('Login Successful', 'homeflash')
             return redirect(url_for('main'))
         else:
             flash("Incorrect Username or Password", 'failed')
@@ -117,7 +118,7 @@ def signup():
 @login_required
 def logout():
     logout_user()
-    flash("You Have Been Logged Out", 'success')
+    flash("You Have Been Logged Out", 'homeflash')
     return redirect(url_for('main'))
 
 @app.route('/tasks', methods=['POST', 'GET'])
@@ -199,6 +200,7 @@ def editnotes(note_id):
         note.ntitle = request.form.get('newtitle')
         note.ncontent = request.form.get('newcontent')
         db.session.commit()
+        flash('Note Edited Successfully', 'success')
         return redirect(url_for('notes'))
 
 @app.route('/bookmarks')
@@ -219,9 +221,31 @@ def addbm():
         newbm = Bookmarks(btitle=name, blink=url, user_id = current_user.uid)
         db.session.add(newbm)
         db.session.commit()
-        flash('Bookmark Created Successfully', 'success')
+        flash('Bookmark Created Successfully', 'bookmark')
+        return redirect(url_for('bookmarks'))
+    
+@app.route('/bookmark/edit/<int:bm_id>', methods=['GET', 'POST'])
+@login_required
+def editbm(bm_id):
+    bm = Bookmarks.query.get_or_404(bm_id)
+    if request.method == 'GET':
+        return render_template('bookmarks/editbm.html', bm=bm, bm_id =bm.bid)
+    if request.method == 'POST':
+        bm.btitle = request.form.get('name')
+        bm.blink = request.form.get('URL')
+        db.session.commit()
+        flash('Bookmark Edited Successfully', 'bookmark')
         return redirect(url_for('bookmarks'))
 
+@app.route('/bookmark/delete/<int:bm_id>', methods=['POST'])
+@login_required
+def deletebm(bm_id):
+    if request.method == 'POST':
+        bm = Bookmarks.query.get_or_404(bm_id)
+        db.session.delete(bm)
+        db.session.commit()
+        flash('Bookmark Deleted Successfully', 'bookmark')
+        return redirect(url_for('bookmarks'))
 
 @app.errorhandler(404)
 def invalid(e):

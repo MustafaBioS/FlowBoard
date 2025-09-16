@@ -22,6 +22,20 @@
                 {% endif %}
             </div>
         </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-container">
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">
+            {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+
+
     </div>
     <div class="btnCon">
         <button class="submit newnote">New Note</button>
@@ -66,20 +80,24 @@
     const newnote = document.querySelector('.newnote');
     const deleteform = document.querySelector('.deleteform');
     const editform = document.querySelector('.editform');
+    const notedits = document.querySelectorAll('.notedit');
+    const notetrashes = document.querySelectorAll('.notetrash');
 
-    if (editform) {
-        editform.addEventListener('click', ()=> {
-            editform.submit()
-        })
-    }
-
-    if (deleteform) {
-        deleteform.addEventListener('click', ()=> {
-            deleteform.submit()
+    notedits.forEach((editBtn) => {
+        editBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            editBtn.closest('form').submit();
+            console.log('Edit clicked');
         });
-    }
+    });
 
-
+    notetrashes.forEach((trashBtn) => {
+        trashBtn.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            trashBtn.closest('form').submit();
+            console.log('Trash clicked');
+        });
+    });
 
     if (newnote) {
         newnote.addEventListener('click', ()=> {
