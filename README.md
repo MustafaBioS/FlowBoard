@@ -1,4 +1,4 @@
-**Flowboard**
+**<h1>Flowboard</h1>**
 
 ---
 
@@ -6,19 +6,19 @@
 
 ---
 
-**Task Manager**
+**<h1>Task Manager</h1>**
 
 ### A simple To Do List/Task Manager app, you can add tasks, delete them when you've finished them, and view them any time! 
 
 ---
 
-**Notes App**
+**<h1>Notes App</h1>**
 
 ### A simple Notes App with CRUD Functionality, you can make notes, edit them, view them, and delete them.
 
 ---
 
-**Bookmarker**
+**<h1>Bookmarker</h1>**
 
 ### A website bookmarker, you put the link of the page you'd like to bookmark, a name for it, and whenever you click on it u get directed to that website!
 
